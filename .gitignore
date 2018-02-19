@@ -1,2 +1,3 @@
 test/.terraform*
 test/terraform.*
+test/*.auto.tfvars
