@@ -25,7 +25,7 @@ resource "null_resource" "cloud_platform" {
 
 module "grid-outputs" {
   source  = "matti/grid-outputs/kontena"
-  version = "0.0.2"
+  version = "0.0.4"
 
   depends_id   = "${null_resource.cloud_platform.id}"
   organization = "${var.organization}"
