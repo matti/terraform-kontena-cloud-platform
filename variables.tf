@@ -17,4 +17,6 @@ variable "initial_size" {
   default = 1
 }
 
-variable "platform_version" {}
+variable "platform_version" {
+  default = ""
+}
