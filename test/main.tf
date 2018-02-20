@@ -1,29 +1,31 @@
-variable "organization1" {}
+variable "organization" {}
 
-variable "organization2" {}
+variable "name_prefix" {}
 
-variable "name1" {}
-
-variable "name2" {}
+variable "platform_version" {
+  default = ""
+}
 
 module "kontena_platform1" {
   source = ".."
 
-  organization = "${var.organization1}"
-  name         = "${var.name1}"
-  type         = "standard"
-  region       = "us-east-1"
-  initial_size = 3
+  organization     = "${var.organization}"
+  name             = "${var.name_prefix}1"
+  type             = "standard"
+  region           = "us-east-1"
+  platform_version = "${var.platform_version}"
+  initial_size     = 3
 }
 
 module "kontena_platform2" {
   source = ".."
 
-  organization = "${var.organization2}"
-  name         = "${var.name2}"
-  type         = "standard"
-  region       = "eu-west-1"
-  initial_size = 3
+  organization     = "${var.organization}"
+  name             = "${var.name_prefix}2"
+  type             = "standard"
+  region           = "eu-west-1"
+  platform_version = "${var.platform_version}"
+  initial_size     = 3
 }
 
 output "grid1" {

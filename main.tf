@@ -4,11 +4,26 @@ resource "null_resource" "start" {
   }
 }
 
+locals {
+  platform_version_or_none = "${var.platform_version == "" ? "" : "--version ${var.platform_version}"}"
+}
+
 resource "null_resource" "cloud_platform" {
   provisioner "local-exec" {
     # kontena platform name can not be reused after delete for about 1 min
     # terraform bug https://github.com/terraform-providers/terraform-provider-null/issues/12
-    command = "for i in `seq 1 6`; do kontena cloud platform create --organization ${var.organization} --type ${var.type} --region ${var.region} --initial-size ${var.initial_size} ${var.name} && break; sleep 20; done"
+    command = <<EOCMD
+for i in `seq 1 6`; do
+  kontena cloud platform create \
+    --organization ${var.organization} \
+    --type ${var.type} \
+    --region ${var.region} \
+    --initial-size ${var.initial_size} \
+    ${local.platform_version_or_none} \
+    ${var.name} && break;
+  sleep 20
+done
+EOCMD
   }
 
   provisioner "local-exec" {

@@ -16,3 +16,5 @@ variable "region" {
 variable "initial_size" {
   default = 1
 }
+
+variable "platform_version" {}
